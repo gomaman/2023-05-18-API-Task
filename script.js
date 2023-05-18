@@ -14,30 +14,30 @@ let number = magicNumber.value;
 
 
 
-function pictureGenerator(button) {
-  let picture = document.createElement("img");
+// function pictureGenerator(button) {
+//   let picture = document.createElement("img");
 
-  button.addEventListener("click", () => {
-    if (dogBreedSelector.value == "random") {
-      fetch(`https://dog.ceo/api/breeds/image/random`)
-        .then((response) => response.json())
-        .then((data) => {
-          picture.src = data.message;
-          picture.classList.add("picture");
-          dogContainer.append(picture);
-        });
-    } else if (dogBreedSelector.value !== "random") {
-      let specificBreed = dogBreedSelector.value;
-      fetch(`https://dog.ceo/api/breed/${specificBreed}/images/random`)
-        .then((response) => response.json())
-        .then((data) => {
-          picture.src = data.message;
-          picture.classList.add("picture");
-          dogContainer.append(picture);
-        });
-    }
-  });
-}
+//   button.addEventListener("click", () => {
+//     if (dogBreedSelector.value == "random") {
+//       fetch(`https://dog.ceo/api/breeds/image/random`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//           picture.src = data.message;
+//           picture.classList.add("picture");
+//           dogContainer.append(picture);
+//         });
+//     } else if (dogBreedSelector.value !== "random") {
+//       let specificBreed = dogBreedSelector.value;
+//       fetch(`https://dog.ceo/api/breed/${specificBreed}/images/random`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//           picture.src = data.message;
+//           picture.classList.add("picture");
+//           dogContainer.append(picture);
+//         });
+//     }
+//   });
+// }
 
 function multiplePictureGenerator(button) {
   magicNumber.addEventListener("change", () => {
@@ -105,5 +105,5 @@ function dogBreedGenerator() {
 
 
 dogBreedGenerator();
-pictureGenerator(dogPictureButton);
+// pictureGenerator(dogPictureButton);
 multiplePictureGenerator(dogPicturesButton);
