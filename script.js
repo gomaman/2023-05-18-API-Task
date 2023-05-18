@@ -5,8 +5,9 @@ let dogPictureButton = document.querySelector("#button-dog-picture-generator");
 let dogPicturesButton = document.querySelector(
   "#button-dog-multiple-picture-generator"
 );
-let dogPictureContainer = document.querySelector(".dog-container");
-let dogPicturesContainer = document.querySelector(".multiple-dog-container");
+let dogPicturesContainer = document.querySelector(".dog-pictures-container")
+let dogContainer = document.querySelector(".dog-container");
+let dogsContainer = document.querySelector(".multiple-dog-container");
 let dogBreedSelector = document.querySelector("#dog-breed-selection");
 let magicNumber = document.querySelector("#magic-number");
 let number = magicNumber.value;
@@ -23,7 +24,7 @@ function pictureGenerator(button) {
         .then((data) => {
           picture.src = data.message;
           picture.classList.add("picture");
-          dogPictureContainer.append(picture);
+          dogContainer.append(picture);
         });
     } else if (dogBreedSelector.value !== "random") {
       let specificBreed = dogBreedSelector.value;
@@ -32,7 +33,7 @@ function pictureGenerator(button) {
         .then((data) => {
           picture.src = data.message;
           picture.classList.add("picture");
-          dogPictureContainer.append(picture);
+          dogContainer.append(picture);
         });
     }
   });
@@ -42,13 +43,10 @@ function multiplePictureGenerator(button) {
   magicNumber.addEventListener("change", () => {
     number = magicNumber.value;
   });
-
+  
   button.addEventListener("click", () => {
-    
-    let picture = document.createElement("img");
-    picture.classList.add("picture");
-    
     if (dogBreedSelector.value == "random") {
+        dogPicturesContainer.innerHTML = ""
       fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
         .then((response) => response.json())
         .then((data) => {
@@ -61,6 +59,7 @@ function multiplePictureGenerator(button) {
           });
         });
     } else if (dogBreedSelector.value !== "random") {
+        dogPicturesContainer.innerHTML = ""
       let specificBreed = dogBreedSelector.value;
       fetch(
         `https://dog.ceo/api/breed/${specificBreed}/images/random/${number}`
@@ -87,7 +86,6 @@ function dogBreedGenerator() {
   
         for (breed in dogBreeds) {
           let subBreeds = dogBreeds[breed];
-  
           if (subBreeds.length > 0) {
             subBreeds.forEach((subBreed) => {
               let breedOption = document.createElement("option");
