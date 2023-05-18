@@ -39,7 +39,6 @@ function pictureGenerator(button) {
 function multiplePictureGenerator(button) {
   magicNumber.addEventListener("change", () => {
     number = magicNumber.value;
-    
   });
 
   button.addEventListener("click", () => {
@@ -85,6 +84,7 @@ function dogBreedGenerator() {
     .then((dogbreed) => {
       const dogBreeds = dogbreed.message;
       for (breed in dogBreeds) {
+        console.log(dogBreeds[breed])
         let breedOption = document.createElement("option");
         breedOption.value = breed;
         breedOption.textContent = breed;
