@@ -2,7 +2,9 @@ let buttonTest = document.querySelector("#test-button");
 let promptLocation = document.querySelector("#prompt");
 let documentTitle = document.querySelector("h1");
 let dogPictureButton = document.querySelector("#button-dog-picture-generator");
-let dogPicturesButton = document.querySelector("#button-dog-multiple-picture-generator");
+let dogPicturesButton = document.querySelector(
+  "#button-dog-multiple-picture-generator"
+);
 let dogPictureContainer = document.querySelector(".dog-container");
 let dogPicturesContainer = document.querySelector(".multiple-dog-container");
 let dogBreedSelector = document.querySelector("#dog-breed-selection");
@@ -10,8 +12,7 @@ let magicNumber = document.querySelector("#magic-number");
 let number = magicNumber.value;
 
 function pictureGenerator(button) {
-
-    let picture = document.createElement("img");
+  let picture = document.createElement("img");
 
   button.addEventListener("click", () => {
     if (dogBreedSelector.value == "random") {
@@ -36,21 +37,26 @@ function pictureGenerator(button) {
 }
 
 function multiplePictureGenerator(button) {
-    magicNumber.addEventListener("change", () => {
+  magicNumber.addEventListener("change", () => {
     number = magicNumber.value;
     
   });
 
   button.addEventListener("click", () => {
+    
+    let picture = document.createElement("img");
+    picture.classList.add("picture");
+    
     if (dogBreedSelector.value == "random") {
+        console.log(number)
       fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
         .then((response) => response.json())
         .then((data) => {
           let dogLink = data.message;
           dogLink.forEach((god) => {
             let picture = document.createElement("img");
-            picture.src = god;
             picture.classList.add("picture");
+            picture.src = god;
             dogPicturesContainer.append(picture);
           });
         });
@@ -64,8 +70,8 @@ function multiplePictureGenerator(button) {
           let dogLink = data.message;
           dogLink.forEach((god) => {
             let picture = document.createElement("img");
-            picture.src = god;
             picture.classList.add("picture");
+            picture.src = god;
             dogPicturesContainer.append(picture);
           });
         });
@@ -90,4 +96,3 @@ function dogBreedGenerator() {
 dogBreedGenerator();
 pictureGenerator(dogPictureButton);
 multiplePictureGenerator(dogPicturesButton);
-
