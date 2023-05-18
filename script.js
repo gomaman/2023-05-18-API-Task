@@ -10,12 +10,14 @@ let magicNumber = document.querySelector("#magic-number");
 let number = magicNumber.value;
 
 function pictureGenerator(button) {
+
+    let picture = document.createElement("img");
+
   button.addEventListener("click", () => {
     if (dogBreedSelector.value == "random") {
       fetch(`https://dog.ceo/api/breeds/image/random`)
         .then((response) => response.json())
         .then((data) => {
-          let picture = document.createElement("img");
           picture.src = data.message;
           picture.classList.add("picture");
           dogPictureContainer.append(picture);
@@ -25,7 +27,6 @@ function pictureGenerator(button) {
       fetch(`https://dog.ceo/api/breed/${specificBreed}/images/random`)
         .then((response) => response.json())
         .then((data) => {
-          let picture = document.createElement("img");
           picture.src = data.message;
           picture.classList.add("picture");
           dogPictureContainer.append(picture);
