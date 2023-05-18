@@ -11,6 +11,8 @@ let dogBreedSelector = document.querySelector("#dog-breed-selection");
 let magicNumber = document.querySelector("#magic-number");
 let number = magicNumber.value;
 
+
+
 function pictureGenerator(button) {
   let picture = document.createElement("img");
 
@@ -47,7 +49,6 @@ function multiplePictureGenerator(button) {
     picture.classList.add("picture");
     
     if (dogBreedSelector.value == "random") {
-        console.log(number)
       fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
         .then((response) => response.json())
         .then((data) => {
@@ -79,19 +80,31 @@ function multiplePictureGenerator(button) {
 }
 
 function dogBreedGenerator() {
-  fetch("https://dog.ceo/api/breeds/list/all")
-    .then((response) => response.json())
-    .then((dogbreed) => {
-      const dogBreeds = dogbreed.message;
-      for (breed in dogBreeds) {
-        console.log(dogBreeds[breed])
-        let breedOption = document.createElement("option");
-        breedOption.value = breed;
-        breedOption.textContent = breed;
-        dogBreedSelector.append(breedOption);
-      }
-    });
-}
+    fetch("https://dog.ceo/api/breeds/list/all")
+      .then((response) => response.json())
+      .then((dogbreed) => {
+        const dogBreeds = dogbreed.message;
+  
+        for (breed in dogBreeds) {
+          let subBreeds = dogBreeds[breed];
+  
+          if (subBreeds.length > 0) {
+            subBreeds.forEach((subBreed) => {
+              let breedOption = document.createElement("option");
+              breedOption.value = `${breed}/${subBreed}`;
+              breedOption.textContent = `${breed} - ${subBreed}`;
+              dogBreedSelector.append(breedOption);
+            });
+          } else {
+            let breedOption = document.createElement("option");
+            breedOption.value = breed;
+            breedOption.textContent = breed;
+            dogBreedSelector.append(breedOption);
+          }
+        }
+      });
+  }
+
 
 dogBreedGenerator();
 pictureGenerator(dogPictureButton);
