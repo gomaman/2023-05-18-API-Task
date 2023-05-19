@@ -12,33 +12,6 @@ let dogBreedSelector = document.querySelector("#dog-breed-selection");
 let magicNumber = document.querySelector("#magic-number");
 let number = magicNumber.value;
 
-
-
-// function pictureGenerator(button) {
-//   let picture = document.createElement("img");
-
-//   button.addEventListener("click", () => {
-//     if (dogBreedSelector.value == "random") {
-//       fetch(`https://dog.ceo/api/breeds/image/random`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//           picture.src = data.message;
-//           picture.classList.add("picture");
-//           dogContainer.append(picture);
-//         });
-//     } else if (dogBreedSelector.value !== "random") {
-//       let specificBreed = dogBreedSelector.value;
-//       fetch(`https://dog.ceo/api/breed/${specificBreed}/images/random`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//           picture.src = data.message;
-//           picture.classList.add("picture");
-//           dogContainer.append(picture);
-//         });
-//     }
-//   });
-// }
-
 function multiplePictureGenerator(button) {
   magicNumber.addEventListener("change", () => {
     number = magicNumber.value;
